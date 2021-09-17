@@ -18,8 +18,8 @@ To do the tests, the SQL is in the following repository:
   - **POST (ADD)** /pets/cat/{objectCat}
   - **POST (UPDATE)** /pets/cat/{objectCat}
   - **POST (UPDATE)** /pets/dogs/{objectDog}
-  - **DELETE ** /pets/cat/{petId}
-  - **DELETE ** /pets/dog/{petId}
+  - **DELETE** /pets/cat/{petId}
+  - **DELETE** /pets/dog/{petId}
   
  - ## Owner/
   - **GET** /owner/
