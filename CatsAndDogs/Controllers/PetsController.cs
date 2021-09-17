@@ -12,6 +12,14 @@ namespace CatsAndDogs.Controllers
     [Route("[controller]")]
     public class PetsController : ControllerBase
     {
+        private readonly IChangeDataRepository _setData;
+        private readonly IGetDataRepository _getData;
+        public PetsController(IChangeDataRepository dataRepository, IGetDataRepository getDataRepository)
+        {
+            _setData = dataRepository;
+            _getData = getDataRepository;
+        }
+
         [HttpGet]
         public List<Pet> Get()
         {
@@ -68,33 +76,29 @@ namespace CatsAndDogs.Controllers
         [Route("Dog")]
         public List<Dogs> Dogs()
         {
-            var repo = new GetDataRepository();
-            return repo.GetDogs();
+            return _getData.GetDogs();
         }
 
         [HttpGet]
         [Route("Cat")]
         public List<Cats> Cats()
         {
-            var repo = new GetDataRepository();
-            return repo.GetCats();
+            return _getData.GetCats();
         }
 
         [HttpGet]
         [Route("OwnerPets/{ownerName}")]
         public List<Dogs> Dogs(string ownerName)
         {
-            var repo = new GetDataRepository();
-            return repo.GetDogs(ownerName);
+            return _getData.GetDogs(ownerName);
         }
 
         [HttpDelete]
         [Route("Dog/{petId}")]
         public IActionResult Dogs(int petId)
         {
-            var repo = new ChangeDataRepository();
             var dog = new Dogs() { Id = petId };
-            repo.DeletePet(dog);
+            _setData.DeletePet(dog);
 
             return Ok();
         }
@@ -103,9 +107,8 @@ namespace CatsAndDogs.Controllers
         [Route("Cat/{petId}")]
         public IActionResult Cats(int petId)
         {
-            var repo = new ChangeDataRepository();
             var cat = new Cats() { Id = petId };
-            repo.DeletePet(cat);
+            _setData.DeletePet(cat);
 
             return Ok();
         }
@@ -114,9 +117,7 @@ namespace CatsAndDogs.Controllers
         [Route("Dog")]
         public IActionResult Cats(Dogs dog)
         {
-            var repo = new ChangeDataRepository();
-            repo.InsertPet(dog);
-
+            _setData.InsertPet(dog);
             return StatusCode(201, "Created");
         }
 
@@ -124,9 +125,7 @@ namespace CatsAndDogs.Controllers
         [Route("Cat")]
         public IActionResult Dogs(Cats cat)
         {
-            var repo = new ChangeDataRepository();
-            repo.InsertPet(cat);
-
+            _setData.InsertPet(cat);
             return StatusCode(201, "Created");
         }
 
@@ -134,9 +133,7 @@ namespace CatsAndDogs.Controllers
         [Route("Cat")]
         public IActionResult DogsUpdate(Cats cat)
         {
-            var repo = new ChangeDataRepository();
-            repo.UpdatePet(cat);
-
+            _setData.UpdatePet(cat);
             return Ok();
         }
 
@@ -144,9 +141,7 @@ namespace CatsAndDogs.Controllers
         [Route("Dog")]
         public IActionResult CatsUpdate(Dogs dog)
         {
-            var repo = new ChangeDataRepository();
-            repo.UpdatePet(dog);
-
+            _setData.UpdatePet(dog);
             return Ok();
         }
     }

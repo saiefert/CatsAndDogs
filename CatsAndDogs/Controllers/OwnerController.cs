@@ -12,6 +12,13 @@ namespace CatsAndDogs.Controllers
     [Route("[controller]")]
     public class OwnerController : ControllerBase
     {
+        private readonly IGetDataRepository _data;
+        public OwnerController(IGetDataRepository dataRepository)
+        {
+            _data = dataRepository;
+        }
+
+
         [HttpGet]
         public List<OwnerStruct> Get()
         {
@@ -27,8 +34,7 @@ namespace CatsAndDogs.Controllers
 
         private List<OwnerStruct> ReturnOwners(string name = null)
         {
-            var repo = new GetDataRepository();
-            var ownersBd = repo.GetOwners();
+            var ownersBd = _data.GetOwners();
             var owners = new List<OwnerStruct>();
 
             foreach (var owner in ownersBd)

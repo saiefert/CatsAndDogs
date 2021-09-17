@@ -27,7 +27,8 @@ namespace CatsAndDogs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddTransient<ChangeDataRepository>();
+            services.AddTransient<IChangeDataRepository, ChangeDataRepository>();
+            services.AddSingleton<IGetDataRepository, GetDataRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

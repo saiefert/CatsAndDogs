@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CatsAndDogs.Repository
 {
-    public class ChangeDataRepository
+    public class ChangeDataRepository : IChangeDataRepository
     {
         #region Metodos para update
         // os metodos abaixo (com sobrecarga) realizam o update)

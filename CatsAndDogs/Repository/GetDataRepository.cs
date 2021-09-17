@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CatsAndDogs.Repository
 {
-    public class GetDataRepository
+    public class GetDataRepository : IGetDataRepository
     {
 
         public List<Dogs> GetDogs()
