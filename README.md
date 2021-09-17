@@ -15,7 +15,7 @@ To do the tests, the SQL is in the following repository:
   - **GET** /pets
   - **GET (FILTER)** /pets/{name}  
   - **PUT (ADD)** /pets/dog/{objectDog}
-  - **POST (ADD)** /pets/cat/{objectCat}
+  - **PUT (ADD)** /pets/cat/{objectCat}
   - **POST (UPDATE)** /pets/cat/{objectCat}
   - **POST (UPDATE)** /pets/dogs/{objectDog}
   - **DELETE** /pets/cat/{petId}
